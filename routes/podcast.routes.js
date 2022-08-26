@@ -6,42 +6,40 @@ const User = require("../models/User.model");
 //searchs for a specific podcast via name
 router.get("/podcasts", (req, res, next) => {
   const client = Client({ apiKey: process.env.LISTEN_API_KEY || null });
-    const {searchValue} = req.body;
+  const { searchValue } = req.body;
 
-  client
-    .typeahead({
-      q: searchValue,
-      show_podcasts: 1,
-    })
-    .then((response) => {
+  const podcastByName = async () => {
+    try {
+      let response = await client.typeahead({
+        q: searchValue,
+        show_podcasts: 1,
+      });
       res.json(response.data);
-    })
-    .catch((error) => {
+    } catch (error) {
       res.json(error.response.data.errorMessage);
-    });
+    }
+  };
+  podcastByName();
 });
-
 
 //search for the episodes on a specific podcast
 router.get("/podcasts/:podcastId", (req, res, next) => {
   const client = Client({ apiKey: process.env.LISTEN_API_KEY || null });
-  const {podcastId}  = req.params;
+  const { podcastId } = req.params;
 
-  client
-    .fetchPodcastById({
-      id: podcastId,
-      next_episode_pub_date: 1479154463000,
-      sort: "recent_first",
-    })
-    .then((response) =>
-        res.json(response.data))
-    .catch((error) => {
-      console.log(error);
-    });
+  const podcastById = async () => {
+    try {
+      let response = await client.fetchPodcastById({
+        id: podcastId,
+        next_episode_pub_date: 1479154463000,
+        sort: "recent_first",
+      });
+      res.json(response.data);
+    } catch (error) {
+      res.json(error.response.data.errorMessage);
+    }
+  };
+  podcastById();
 });
-
-
-
-
 
 module.exports = router;
