@@ -5,24 +5,24 @@ const userSchema = new Schema(
   {
     name: {
       type: String,
-      required: true,
+/*       required: true, */
     },
     surname: {
       type: String,
-      required: true,
+/*       required: true, */
     },
     email: {
       type: String,
-      required: true,
+/*       required: true, */
       unique: true,
     },
     username: {
       type: String,
-      required: true,
+/*       required: true, */
     },
     password: {
       type: String,
-      required: true,
+/*       required: true, */
     },
     favoriteEpisodes: [{type: Schema.Types.ObjectId, ref: 'FavoriteEpisodes'}],
     favoritePodcasts: [{type: Schema.Types.ObjectId, ref: 'FavoritePodcasts'}]

@@ -17,7 +17,8 @@
     "express-jwt": "^7.7.5",
     "express-session": "^1.17.3",
     "mongoose": "^6.5.2",
-    "morgan": "^1.10.0"
+    "morgan": "^1.10.0",
+    "podcast-api": "^1.1.4"
   },
   "devDependencies": {
     "nodemon": "^2.0.19"
