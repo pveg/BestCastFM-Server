@@ -1,5 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User.model");
+const favoriteEpisodes = require("../models/FavoriteEpisodes.model")
+const FavoritePodcasts = require("../models/FavoritePodcasts.model")
 
 // finds user by username
 
@@ -9,7 +11,7 @@ router.get("/profile/:username", (req, res, next) => {
 
   const findOneUser = async () => {
     try {
-      let response = await User.findOne({ username });
+      let response = await User.findOne({ username }).populate('favoriteEpisodes').populate('favoritePodcasts');
       console.log(response);
       res.status(200).json(response);
     } catch (error) {
