@@ -4,23 +4,19 @@ const User = require("../models/User.model");
 // finds user by username
 
 router.get("/profile/:username", (req, res, next) => {
-  const username = req.params;
+  const { username } = req.params;
   console.log(username);
 
-  User.findOne(username)
-  .then((response) => console.log(response))
-  .catch(err => console.log(err))
-
-/*   const findOneUser = async () => {
+  const findOneUser = async () => {
     try {
-      let response = await User.findOne({'username': {"$ne": 'username'}});
+      let response = await User.findOne({ username });
       console.log(response);
-      res.json(response);
+      res.status(200).json(response);
     } catch (error) {
       res.json(error);
     }
   };
-  findOneUser(); */
+  findOneUser();
 });
 
 //edit user
@@ -51,11 +47,9 @@ router.delete("/profile/:username/delete", (req, res, next) => {
   const deleteUser = async () => {
     try {
       let response = await User.findOneAndDelete(username);
-      res
-        .status(200)
-        .json({
-          message: `The user with username ${username} was successfully deleted from the database.`,
-        });
+      res.status(200).json({
+        message: `The user with username ${username} was successfully deleted from the database.`,
+      });
     } catch (error) {
       res.json(error);
     }

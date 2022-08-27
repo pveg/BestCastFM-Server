@@ -11,7 +11,7 @@ router.get("/podcasts", (req, res, next) => {
   const podcastByName = async () => {
     try {
       let response = await client.typeahead({
-        q: searchValue,
+        q: {searchValue},
         show_podcasts: 1,
       });
       res.json(response.data);
