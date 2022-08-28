@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const User = require("../models/User.model");
-const favoriteEpisodes = require("../models/FavoriteEpisodes.model")
-const FavoritePodcasts = require("../models/FavoritePodcasts.model")
+const FavoritePodcasts = require("../models/FavoritePodcasts.model");
+const FavoriteEpisodes = require("../models/FavoriteEpisodes.model");
 
 // finds user by username
 
@@ -11,7 +11,9 @@ router.get("/profile/:username", (req, res, next) => {
 
   const findOneUser = async () => {
     try {
-      let response = await User.findOne({ username }).populate('favoriteEpisodes').populate('favoritePodcasts');
+      let response = await User.findOne({ username })
+        .populate("favoriteEpisodes")
+        .populate("favoritePodcasts");
       console.log(response);
       res.status(200).json(response);
     } catch (error) {
@@ -19,6 +21,40 @@ router.get("/profile/:username", (req, res, next) => {
     }
   };
   findOneUser();
+});
+
+//Get favorite episodes
+router.get("/profile/:username/favorite-episodes", (req, res, next) => {
+  const { username } = req.params;
+
+  const getFavoriteEpisodes = async () => {
+    try {
+      let response = await User.findOne({ username }).populate(
+        "favoriteEpisodes"
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      res.json(error);
+    }
+  };
+  getFavoriteEpisodes();
+});
+
+//get favorite podcasts
+router.get("/profile/:username/favorite-episodes", (req, res, next) => {
+  const { username } = req.params;
+
+  const getFavoritePodcasts = async () => {
+    try {
+      let response = await User.findOne({ username }).populate(
+        "favoritePodcasts"
+      );
+      res.status(200).json(response);
+    } catch (error) {
+      res.json(error);
+    }
+  };
+  getFavoritePodcasts();
 });
 
 //edit user
@@ -58,5 +94,6 @@ router.delete("/profile/:username/delete", (req, res, next) => {
   };
   deleteUser();
 });
+
 
 module.exports = router;

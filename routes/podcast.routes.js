@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const FavoriteEpisodes = require("../models/FavoriteEpisodes.model");
+const favoritePodcasts = require("../models/FavoritePodcasts.model");
 const { Client } = require("podcast-api");
 const User = require("../models/User.model");
 
@@ -11,7 +12,7 @@ router.get("/podcasts", (req, res, next) => {
   const podcastByName = async () => {
     try {
       let response = await client.typeahead({
-        q: {searchValue},
+        q: { searchValue },
         show_podcasts: 1,
       });
       res.json(response.data);
@@ -43,3 +44,4 @@ router.get("/podcasts/:podcastId", (req, res, next) => {
 });
 
 module.exports = router;
+
