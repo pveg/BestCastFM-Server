@@ -2,12 +2,13 @@ const { Schema, model } = require("mongoose");
 
 const FavoriteEpisodesSchema = new Schema(
   {
-    title_original: String,
-    episodeId: String,
+    title: String,
+    id: String,
     thumbnail: String,
-    audio_file: String,
+    audio: String,
     audio_length_sec: Number,
-    description_original: String,
+    description: String,
+    image: String,
   },
   {
     timestamps: true,
