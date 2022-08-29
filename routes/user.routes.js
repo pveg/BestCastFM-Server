@@ -41,7 +41,7 @@ router.get("/profile/:username/favorite-episodes", (req, res, next) => {
 });
 
 //get favorite podcasts
-router.get("/profile/:username/favorite-episodes", (req, res, next) => {
+router.get("/profile/:username/favorite-podcasts", (req, res, next) => {
   const { username } = req.params;
 
   const getFavoritePodcasts = async () => {
