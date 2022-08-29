@@ -1,4 +1,5 @@
 const router = require("express").Router();
+const fileUploader = require('../config/cloudinary.config');
 
 // ℹ️ Handles password encryption
 const bcrypt = require("bcrypt");
@@ -19,7 +20,7 @@ router.get("/verify", isAuthenticated, (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { username, password } = req.body;
+  const { username, password, email, name, surname } = req.body;
 
   if (!username) {
     return res
@@ -48,6 +49,9 @@ router.post("/signup", (req, res) => {
         return User.create({
           username,
           password: hashedPassword,
+          email,
+          surname,
+          name,
         });
       })
       .then((user) => {
