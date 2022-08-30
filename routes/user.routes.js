@@ -60,7 +60,7 @@ router.get("/profile/:username/favorite-podcasts", (req, res, next) => {
 
 //edit user
 
-router.put("/profile/:username/edit", (req, res, next) => {
+router.put("/profile/:username/edit", async (req, res, next) => {
   const { username } = req.params;
   const { name, surname, password, email } = req.body;
   const findToUpdate = async () => {
