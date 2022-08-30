@@ -5,16 +5,17 @@ const { Client } = require("podcast-api");
 const User = require("../models/User.model");
 
 //searchs for a specific podcast via name
-router.get("/podcasts", (req, res, next) => {
+router.post("/podcasts", async (req, res, next) => {
   const client = Client({ apiKey: process.env.LISTEN_API_KEY || null });
   const { searchValue } = req.body;
-
+  console.log(searchValue)
   const podcastByName = async () => {
     try {
       let response = await client.typeahead({
-        q: { searchValue },
+        q: searchValue ,
         show_podcasts: 1,
       });
+      console.log(response.data)
       res.json(response.data);
     } catch (error) {
       res.json(error.response.data.errorMessage);
