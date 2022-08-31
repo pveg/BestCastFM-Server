@@ -8,6 +8,7 @@ const { Client } = require("podcast-api");
 router.post("/favorites/:username/:podcastId", async (req, res, next) => {
   const client = Client({ apiKey: process.env.LISTEN_API_KEY || null });
   const { podcastId, username } = req.params;
+  console.log(podcastId, username)
 
     try {
       let response = await client.fetchPodcastById({

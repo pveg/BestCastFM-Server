@@ -2,6 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const FavoritePodcasts = require("../models/FavoritePodcasts.model");
 const FavoriteEpisodes = require("../models/FavoriteEpisodes.model");
+const fileUploader = require("../config/cloudinary.config")
 
 
 // finds user by username
@@ -62,12 +63,12 @@ router.get("/profile/:username/favorite-podcasts", (req, res, next) => {
 
 router.put("/profile/:username/edit", async (req, res, next) => {
   const { username } = req.params;
-  const { name, surname, password, email } = req.body;
+  const { name, surname, password, email, profileImage } = req.body;
   const findToUpdate = async () => {
     try {
       let response = await User.findOneAndUpdate(
         username,
-        { name, surname, password, email },
+        { name, surname, password, email, profileImage },
         { new: true }
       );
       res.status(201).json(findToUpdate);
@@ -77,6 +78,7 @@ router.put("/profile/:username/edit", async (req, res, next) => {
   };
   findToUpdate();
 });
+
 
 //delete user
 

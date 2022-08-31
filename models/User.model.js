@@ -24,6 +24,7 @@ const userSchema = new Schema(
       type: String,
 /*       required: true, */
     },
+    profileImage: String,
     favoriteEpisodes: [{type: Schema.Types.ObjectId, ref: 'FavoriteEpisodes'}],
     favoritePodcasts: [{type: Schema.Types.ObjectId, ref: 'FavoritePodcasts'}]
   },
