@@ -20,7 +20,7 @@ router.get("/verify", isAuthenticated, (req, res) => {
 });
 
 router.post("/signup", (req, res) => {
-  const { username, password, email, name, surname } = req.body;
+  const { username, password, email, name, surname, profileImage } = req.body;
 
   if (!username) {
     return res
@@ -52,6 +52,7 @@ router.post("/signup", (req, res) => {
           email,
           surname,
           name,
+          profileImage,
         });
       })
       .then((user) => {
