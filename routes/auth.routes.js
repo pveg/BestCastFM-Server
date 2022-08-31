@@ -97,8 +97,8 @@ router.post("/login", (req, res, next) => {
           return res.status(400).json({ errorMessage: "Wrong credentials." });
         }
 
-        const { _id, username, email, surname, name } = user;
-        const payload = { _id, username, email, surname, name };
+        const { _id, username, email, surname, name, profileImage } = user;
+        const payload = { _id, username, email, surname, name, profileImage };
 
         const authToken = jwt.sign(payload, process.env.TOKEN_SECRET, {
           algorithm: "HS256",
