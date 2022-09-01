@@ -2,10 +2,9 @@ const { Schema, model } = require("mongoose");
 
 const FavoritePodcastsSchema = new Schema(
   {
-    title: String,
-    image: String,
-    id: String,
-    total_episodes: Number,
+    collectionName: String,
+    artworkUrl600: String,
+    collectionId: String,
   },
   {
     timestamps: true,
