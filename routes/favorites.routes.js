@@ -19,11 +19,12 @@ router.post("/favorites/:username/:podcastId", async (req, res, next) => {
         image,
       })
       .then((response) => {
-        console.log(response._id)
+        const {id} = response._id
         User.findOneAndUpdate(
-          { username },
-          { $push: { favoritePodcasts: response._id } }
+           {username} ,
+          { $push: { favoritePodcasts: id } }
         );
+        console.log(username)
       });
     })
     .then(() => res.status(201).json("Added to favorites"))
