@@ -2,8 +2,7 @@ const router = require("express").Router();
 const User = require("../models/User.model");
 const FavoritePodcasts = require("../models/FavoritePodcasts.model");
 const FavoriteEpisodes = require("../models/FavoriteEpisodes.model");
-const { Client } = require("podcast-api");
-const { response } = require("express");
+const itunesPodcasts = require("itunes-podcasts");
 
 //Adds podcast to favorites
 router.post("/favorites/:username/:podcastId", async (req, res, next) => {
@@ -12,18 +11,26 @@ router.post("/favorites/:username/:podcastId", async (req, res, next) => {
 
   itunesPodcasts
     .getPodcastWithEpisodes(podcastId)
-    .then((response) =>
-      User.findOneAndUpdate(
-        { username },
-        { $push: { favoritePodcasts: response._id } }
-      )
-    )
+    .then((response) => {
+      console.log(response.title)
+      const { image, title } = response;
+      FavoritePodcasts.create({
+        title,
+        image,
+      })
+      .then((response) => {
+        console.log(response._id)
+        User.findOneAndUpdate(
+          { username },
+          { $push: { favoritePodcasts: response._id } }
+        );
+      });
+    })
     .then(() => res.status(201).json("Added to favorites"))
     .catch((err) => res.json(err));
 });
 
 router.post("/favorites/:username/:episodeId", async (req, res, next) => {
-  const client = Client({ apiKey: process.env.LISTEN_API_KEY || null });
   const { episodeId, username } = req.params;
 
   try {

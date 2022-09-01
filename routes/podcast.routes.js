@@ -1,7 +1,6 @@
 const router = require("express").Router();
 const FavoriteEpisodes = require("../models/FavoriteEpisodes.model");
 const favoritePodcasts = require("../models/FavoritePodcasts.model");
-const { Client } = require("podcast-api");
 const User = require("../models/User.model");
 const itunesPodcasts = require('itunes-podcasts')
 
