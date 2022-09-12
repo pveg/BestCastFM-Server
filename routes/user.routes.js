@@ -25,23 +25,6 @@ router.get("/profile/:username", (req, res, next) => {
   findOneUser();
 });
 
-//Get favorite episodes
-router.get("/profile/:username/favorite-episodes", (req, res, next) => {
-  const { username } = req.params;
-
-  const getFavoriteEpisodes = async () => {
-    try {
-      let response = await User.findOne({ username }).populate(
-        "favoriteEpisodes"
-      );
-      res.status(200).json(response);
-    } catch (error) {
-      res.json(error);
-    }
-  };
-  getFavoriteEpisodes();
-});
-
 //get favorite podcasts
 router.get("/profile/:username/favorite-podcasts", (req, res, next) => {
   const { username } = req.params;
